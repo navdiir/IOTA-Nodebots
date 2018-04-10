@@ -1,0 +1,15 @@
+{
+  "name": "IOTA-Nodebot",
+  "version": "0.0.1",
+  "description": "Testing Nodebots to publish data with MAM in Tangle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@chrislaive",
+  "license": "MIT",
+  "dependencies": {
+    "iota.lib.js": "^0.4.7",
+    "johnny-five": "^0.14.3"
+  }
+}
