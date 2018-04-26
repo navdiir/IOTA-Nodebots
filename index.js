@@ -24,7 +24,7 @@ const board = new five.Board({
 
 const start = function(){
 
-  let temp1Data, temp2Data, soundSensorData, ldrData, date    //We are gonna saved each data in these var.
+  let tempData, ldrData, date    //We are gonna saved each data in these var.
   
   //Start getting data from the board
   board.on('ready',getData)
@@ -36,20 +36,9 @@ const start = function(){
     console.log('Getting data ...\n\n')
 
     //Creating objects for the sensors        
-    let temp1 = new five.Thermometer({          
+    let temp = new five.Thermometer({          
       controller: 'LM35',
       pin: 'A0',
-      freq: timeLoop*1000
-    })
-
-    let temp2 = new five.Thermometer({
-      controller: 'LM35',
-      pin: 'A2',
-      freq: timeLoop*1000
-    })
-
-    let soundSensor = new five.Sensor({
-      pin: 'A3',
       freq: timeLoop*1000
     })
 
@@ -59,16 +48,8 @@ const start = function(){
     })
 
     //Start getting data from them and saving on the var. that we create before
-    temp1.on('data', function() {
-      temp1Data = this.C
-    })
-
-    temp2.on('data', function() {
-      temp2Data = this.C
-    })
-
-    soundSensor.on('data', function(){
-      soundSensorData = this.value
+    temp.on('data', function() {
+      tempData = this.C
     })
 
     //In this last one we are gonna including some extra code
@@ -76,8 +57,8 @@ const start = function(){
       ldrData = this.value
 
       //Saving the actual date and create a Json object with the data
-      date = new Date().toISOString().replace('T', ' ').substr(0, 19)
-      let streamData = { 'LM35_1':temp1Data, 'LM35_2': temp2Data, 'Noise': soundSensorData, 'LDR': ldrData, 'Date':date, 'Counter':i}
+      date = new Date(Date.now()).toLocaleString()
+      let streamData = { 'LM35':tempData, 'LDR': ldrData, 'Date':date, 'Counter':i}
       
       /* Some custom log for the console first showing that Json object, then showing
       the same object but in Trytes and at the end we publish that stream in trytes
