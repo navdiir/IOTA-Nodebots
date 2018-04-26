@@ -15,7 +15,7 @@ const logData = data => {
 
 //Fetching async
 const execute = async () => {
-	let resp = await Mam.fetch(root, 'public',null,logData)
+	let resp = await Mam.fetch(root, 'restricted','CHRISLAIVELOVESIOTA',logData)
 	console.log(resp)
 }
 
